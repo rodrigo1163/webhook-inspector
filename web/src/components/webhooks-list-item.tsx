@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate, useParams } from '@tanstack/react-router'
 import { IconButton } from './ui/icon-button'
-import { Trash2Icon } from 'lucide-react'
+import { Trash2Icon, Loader2 } from 'lucide-react'
 import { Checkbox } from './ui/checkbox'
 import { formatDistanceToNow } from 'date-fns'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -14,17 +14,25 @@ interface WebhookListItemProps {
 }
 
 export function WebhooksListItem({ webhook }: WebhookListItemProps) {
+  const { id } = useParams({ strict: false })
+  const navigate = useNavigate()
   const queryClient = useQueryClient()
-  const { mutate: deleteWebhook  } = useMutation({
+  const { mutate: deleteWebhook, isPending } = useMutation({
     mutationFn: async (id: string) => {
       await fetch(`http://localhost:3333/api/webhooks/${id}`, {
         method: 'DELETE',
       })
     },
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
+
       queryClient.invalidateQueries({
         queryKey: ['webhooks']
       })
+      if (id === variables) {
+        navigate({
+          to: '/'
+        })
+      }
     }
   })
 
@@ -50,9 +58,16 @@ export function WebhooksListItem({ webhook }: WebhookListItemProps) {
           </div>
         </Link>
         <IconButton
-          icon={<Trash2Icon className="size-3.5 text-zinc-400" />}
+          icon={
+            isPending ? (
+              <Loader2 className="size-3.5 text-zinc-400 animate-spin" />
+            ) : (
+              <Trash2Icon className="size-3.5 text-zinc-400" />
+            )
+          }
           className="opacity-0 transition-opacity group-hover:opacity-100"
           onClick={() => deleteWebhook(webhook.id)}
+          disabled={isPending}
         />
       </div>
     </div>

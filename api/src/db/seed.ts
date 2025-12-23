@@ -210,8 +210,10 @@ async function seed() {
   try {
     const webhookData = []
 
+    await db.delete(webhooks)
+
     // Gerar pelo menos 60 webhooks (gerando 65 para ter margem)
-    for (let i = 0; i < 65; i++) {
+    for (let i = 0; i < 20; i++) {
       const eventType = faker.helpers.arrayElement(stripeEventTypes)
       const method = faker.helpers.arrayElement(httpMethods)
       const pathname = `/webhook/stripe`

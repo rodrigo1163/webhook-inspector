@@ -18,8 +18,9 @@ export function WebhookDetails({ id }: WebhookDetailsProps) {
 
       return webhookDetailsSchema.parse(data)
     },
-    
   })
+
+
 
   const overviewData = [
     { key: 'Method', value: data.method },
