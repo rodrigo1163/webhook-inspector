@@ -18,6 +18,7 @@ export function WebhookDetails({ id }: WebhookDetailsProps) {
 
       return webhookDetailsSchema.parse(data)
     },
+    
   })
 
   const overviewData = [
