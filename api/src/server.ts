@@ -10,6 +10,7 @@ import { fastifyCors } from '@fastify/cors'
 import ScalarApiReference from '@scalar/fastify-api-reference'
 import { listWebhooks } from './routes/list-webhook'
 import { env } from './env'
+import { getWebhook } from './routes/get-webhook'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -38,6 +39,7 @@ app.register(ScalarApiReference, {
 })
 
 app.register(listWebhooks)
+app.register(getWebhook)
 
 app.listen({ port: env.PORT, host: '0.0.0.0' }).then(() => {
   console.log('🔥 HTTP server running on http://localhost:3333')
