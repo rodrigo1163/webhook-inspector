@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Panel, PanelResizeHandle, PanelGroup } from 'react-resizable-panels'
 import { Sidebar } from '../components/sidebar'
-import { Badge } from '../components/ui/badge'
 import { WebhookDetailHeader } from '../components/webhook-detail-header'
 import { SectionTitle } from '../components/section-title'
 import { SectionDataTable } from '../components/section-data-table'
