@@ -8,6 +8,13 @@
       "when": 1766170254452,
       "tag": "0000_silly_princess_powerful",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1766523643124,
+      "tag": "0001_salty_morlun",
+      "breakpoints": true
     }
   ]
 }
